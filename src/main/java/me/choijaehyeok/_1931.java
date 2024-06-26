@@ -12,13 +12,13 @@ public class _1931 {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        int N = Integer.parseInt(br.readLine());
+        int num = Integer.parseInt(br.readLine());
 
-        int[][] time = new int[N][2];
+        int[][] time = new int[num][2];
 
         StringTokenizer st;
 
-        for(int i = 0; i < N; i++) {
+        for(int i = 0; i < num; i++) {
             st = new StringTokenizer(br.readLine(), " ");
             time[i][0] = Integer.parseInt(st.nextToken());
             time[i][1] = Integer.parseInt(st.nextToken());
@@ -34,12 +34,12 @@ public class _1931 {
         });
 
         int count = 0;
-        int prev_end_time = 0;
+        int endTime = 0;
 
-        for(int i = 0; i < N; i++) {
+        for(int i = 0; i < num; i++) {
 
-            if(prev_end_time <= time[i][0]) {
-                prev_end_time = time[i][1];
+            if(endTime <= time[i][0]) {
+                endTime = time[i][1];
                 count++;
             }
         }
