@@ -5,62 +5,55 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
 
 public class _4949 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        List<String> str = new ArrayList<String>();
+        char[] str = new char[100];
         char [] bracket = new char[100];
         int top = -1;
         ArrayList<String> check = new ArrayList<String>();
 
         int cnt = 0;
         check.add("yes");
-        str.add(st.nextToken());
+        str = (br.readLine()).toCharArray();
+
             while (true) {
-                if (str.get(0).equals(".")) {
+                if (str[0] == ('.')) {
                     break;
                 }
-                if(str.get(str.size() - 1).contains("(")){
-                    bracket[++top] = '(';
-                }
-                if (str.get(str.size() - 1).contains("[")) {
-                    bracket[++top] = '[';
-                }
-                if (str.get(str.size() - 1).contains(")")) {
-                    if(bracket[top] == '('){
-                        check.add(cnt,"yes");
-                        check.remove(cnt + 1);
-                        top--;
-                    }else {
-                        check.add(cnt,"no");
-                        check.remove(cnt + 1);
+                for (int i = 0; i < str.length; i++) {
+                    if(str[i] == ('(')) {
+                        bracket[++top] = '(';
+                    }if (str[i] == ('[')) {
+                        bracket[++top] = '[';
                     }
-                }
-                if (str.get(str.size() - 1).contains("]")) {
-                    if(bracket[top] == '['){
-                        check.add(cnt,"yes");
-                        check.remove(cnt + 1);
-                        top--;
-                    }else {
-                        check.add(cnt,"no");
-                        check.remove(cnt + 1);
+                    if (str[i] == (')')) {
+                        if(bracket[top] == '('){
+                            check.set(cnt,"yes");
+                            top--;
+                        }else {
+                            check.set(cnt,"no");
+                        }
                     }
-                }
-                if(top != -1){
-                    check.add(cnt,"no");
-                    check.remove(cnt + 1);
-                }
+                    if (str[i] == (']')) {
+                        if(bracket[top] == '['){
+                            check.set(cnt,"yes");
+                            top--;
+                        }else {
+                            check.set(cnt,"no");
+                        }
+                    }
+                    if(top != -1){
+                        check.set(cnt,"no");
+                    }
 
-                if(str.get(str.size() - 1).contains(".")){
-                    str.clear();
-                    cnt++;
-                    st = new StringTokenizer(br.readLine());
-                    str.add(st.nextToken());
-                }else {
-                    str.add(st.nextToken());
+                    if(str[i] == ('.')){
+                        str = new char[100];
+                        cnt++;
+                        str = br.readLine().toCharArray();
+                    }
+
                 }
             }
         for (int i = 0; i < check.size(); i++) {
